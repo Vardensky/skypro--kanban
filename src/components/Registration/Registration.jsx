@@ -23,7 +23,7 @@ const Registration = () => {
       })
       .catch((error) => {
         if (error.message === "Failed to fetch") {
-          setError("ошибка соединения");
+          setError("ошибка соединения ");
         } else {
           setError(error.message);
         }
