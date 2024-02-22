@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import HeaderContainer from "../components/HeaderContainer";
+import HeaderContainer from "../components/HeaderContainer/HeaderContainer";
 
 
 
@@ -8,6 +8,8 @@ import Cards from "../components/Cards/Cards";
 import { Outlet } from "react-router-dom";
 import { getTasks } from "../API/tasks";
 import { TasksContext } from "../components/TasksProvider/TasksProvider";
+import { Container } from "../shared/Common.styled";
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const MainPage = () => {
   
@@ -40,7 +42,7 @@ const MainPage = () => {
         <HeaderContainer handleExit={handleExit} />
       </header>
       <main className="main">
-        <div className="container">
+        <Container>
           {error ? (
             <p style={{ color: "red", padding: "2em", textAlign: "center" }}>
               {error}
@@ -48,7 +50,7 @@ const MainPage = () => {
           ) : (
             <Cards isLoading={isLoading} cards={tasks} />
           )}
-        </div>
+        </Container>
       </main>
       <Outlet />
     </div>

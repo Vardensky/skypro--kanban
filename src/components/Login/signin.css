@@ -103,6 +103,7 @@ a {
   outline: none;
   padding: 10px 8px;
 }
+
 .modal__input::-moz-placeholder {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -159,6 +160,8 @@ a {
 .modal__form-group a {
   text-decoration: underline;
 }
+
+
 
 @media screen and (max-width: 375px) {
   .modal {

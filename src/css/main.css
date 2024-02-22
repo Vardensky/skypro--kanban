@@ -585,6 +585,7 @@ body {
 }
 .pop-browse__content .theme-top {
   display: block;
+  cursor: pointer;
 }
 .pop-browse__top-block {
   display: flex;
