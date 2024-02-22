@@ -19,9 +19,9 @@ function Card(props) {
                     </Link>
                 </S.CardGroup>
                 <S.CardContent>
-                    <a href="" target="_blank">
+                    <Link to={`/card/${props.id}`} target="_self">
                         <S.CardTitle>{props.title}</S.CardTitle>
-                    </a>
+                    </Link>
                     <S.CardDate>
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
                             <g clipPath="url(#clip0_1_415)">

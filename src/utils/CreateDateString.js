@@ -1,4 +1,6 @@
+import { format } from "date-fns";
+
 export const createDateString = () => {
-    const currentDate = new Date();
-    return currentDate.toLocaleString()
-}
+  const currentDate = format(new Date(), "yyyy-MM-dd");
+  return currentDate.toLocaleString();
+};

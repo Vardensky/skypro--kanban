@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesObject } from "../../utils/Routes/Routes";
 import "./signup.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { userRegistation } from "../../API/auth";
 
 const Registration = () => {
@@ -10,6 +10,17 @@ const Registration = () => {
   const [nameState, setNameState] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const loginRef = useRef(null);
+
+  useEffect(() => {
+    loginRef.current.focus();
+  }, []);
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      registration(e);
+    }
+  };
   async function registration(e) {
     e.preventDefault();
 
@@ -23,7 +34,7 @@ const Registration = () => {
       })
       .catch((error) => {
         if (error.message === "Failed to fetch") {
-          setError("ошибка соединения");
+          setError("Ошибка");
         } else {
           setError(error.message);
         }
@@ -40,8 +51,14 @@ const Registration = () => {
             </div>
             <form className="modal__form-login" id="formLogUp" action="#">
               <input
+              ref={loginRef}
+                style={{
+                  borderColor:
+                    error && nameState.trim() === "" ? "red" : "gray",
+                }}
                 value={nameState}
                 onChange={(e) => setNameState(e.target.value)}
+                onKeyDown={handleKeyPress}
                 className="modal__input first-name"
                 type="text"
                 name="first-name"
@@ -49,8 +66,13 @@ const Registration = () => {
                 placeholder="Имя"
               />
               <input
+                style={{
+                  borderColor:
+                    error && loginState.trim() === "" ? "red" : "gray",
+                }}
                 value={loginState}
                 onChange={(e) => setLoginState(e.target.value)}
+                onKeyDown={handleKeyPress}
                 className="modal__input login"
                 type="text"
                 name="login"
@@ -58,8 +80,13 @@ const Registration = () => {
                 placeholder="Эл. почта"
               />
               <input
+                style={{
+                  borderColor:
+                    error && passwordState.trim() === "" ? "red" : "gray",
+                }}
                 value={passwordState}
                 onChange={(e) => setPasswordState(e.target.value)}
+                onKeyDown={handleKeyPress}
                 className="modal__input password-first"
                 type="password"
                 name="password"
@@ -72,7 +99,7 @@ const Registration = () => {
                 className="modal__btn-signup-ent _hover01"
                 id="SignUpEnter"
               >
-                Зарегистрироватьсz
+                Зарегистрироваться
               </button>
               <div className="modal__form-group">
                 <p>

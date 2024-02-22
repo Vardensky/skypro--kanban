@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesObject } from "../../utils/Routes/Routes";
 import "./signin.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { loginUser } from "../../API/auth";
 
 const Login = ({ setAuth }) => {
@@ -9,19 +9,29 @@ const Login = ({ setAuth }) => {
   const [passwordState, setPasswordState] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const loginRef = useRef(null);
+
+  useEffect(() => {
+    loginRef.current.focus();
+  }, []);
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      Login(e);
+    }
+  };
 
   async function login(e) {
     e.preventDefault();
     loginUser({ login: loginState, password: passwordState })
       .then(() => {
-        const userItem = JSON.parse(localStorage.getItem("user"))
+        const userItem = JSON.parse(localStorage.getItem("user"));
 
         setAuth(userItem);
         navigate(RoutesObject.MAIN);
       })
       .catch((error) => {
         if (error.message === "Failed to fetch") {
-          setError("У Вас проблемы, блять ....");
+          setError("Ошибка");
         } else {
           setError(error.message);
         }
@@ -37,6 +47,12 @@ const Login = ({ setAuth }) => {
             </div>
             <form className="modal__form-login" id="formLogIn" action="#">
               <input
+              ref={loginRef}
+                onKeyDown={handleKeyPress}
+                style={{
+                  borderColor:
+                    error && loginState.trim() === "" ? "red" : "gray",
+                }}
                 value={loginState}
                 onChange={(e) => setLoginState(e.target.value)}
                 className="modal__input"
@@ -46,6 +62,11 @@ const Login = ({ setAuth }) => {
                 placeholder="Эл. почта"
               />
               <input
+                onKeyDown={handleKeyPress}
+                style={{
+                  borderColor:
+                    error && passwordState.trim() === "" ? "red" : "gray",
+                }}
                 value={passwordState}
                 onChange={(e) => setPasswordState(e.target.value)}
                 className="modal__input"
@@ -59,6 +80,8 @@ const Login = ({ setAuth }) => {
                 onClick={(e) => login(e)}
                 className="modal__btn-enter _hover01"
                 id="btnEnter"
+                disabled={!!error}
+                style={{ backgroundColor: error ? "grey" : "blue" }}
               >
                 Войти
               </button>

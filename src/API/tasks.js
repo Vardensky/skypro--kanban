@@ -63,3 +63,35 @@ export async function taskDelete({ id }) {
   return responseObj;
 }
 
+export async function taskEdit({
+  _id,
+  title,
+  topic,
+  status,
+  description,
+  date,
+}) {
+  let user = localStorage.getItem("user");
+  if (user) {
+    user = JSON.parse(user);
+  }
+  let response = await fetch(`${API_URL}/${_id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+    body: JSON.stringify({
+      title: title,
+      topic: topic,
+      status: status,
+      description: description,
+      date: date,
+    }),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+  const responseObj = await response.json();
+  return responseObj;
+}

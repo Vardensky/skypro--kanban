@@ -1,11 +1,12 @@
 import { createDateString } from "./CreateDateString";
+import { format } from "date-fns";
 
 export const cardList = [
   {
     id: 1,
     theme: "Web Design",
     title: "С",
-    date: createDateString(),
+    date: format(createDateString(), "dd.MM.yyyy"),
     status: "Без статуса",
     description: "",
   },
@@ -13,7 +14,7 @@ export const cardList = [
     id: 2,
     theme: "Research",
     title: "Годом",
-    date: createDateString(),
+    date: format(createDateString(), "dd.MM.yyyy"),
     status: "В работе",
     description: "",
   },
@@ -21,7 +22,7 @@ export const cardList = [
     id: 3,
     theme: "Copywriting",
     title: "Счастья",
-    date: createDateString(),
+    date: format(createDateString(), "dd.MM.yyyy"),
     status: "Тестирование",
     description: "",
   },
@@ -29,7 +30,7 @@ export const cardList = [
     id: 4,
     theme: "Web Design",
     title: "Новым",
-    date: createDateString(),
+    date: format(createDateString(), "dd.MM.yyyy"),
     status: "Нужно сделать",
     description: "",
   },
@@ -37,7 +38,7 @@ export const cardList = [
     id: 5,
     theme: "Web Design",
     title: "Радости",
-    date: createDateString(),
+    date: format(createDateString(), "dd.MM.yyyy"),
     status: "Готово",
     description: "",
   },
@@ -45,7 +46,7 @@ export const cardList = [
     id: 6,
     theme: "Web Design",
     title: "Ёлка",
-    date: createDateString(),
+    date: format(createDateString(), "dd.MM.yyyy"),
     status: "Без статуса",
     description: "",
   },
